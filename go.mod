@@ -1,4 +1,4 @@
-module github.com/terrapi-solution/terrapi-protocol
+module github.com/terrapi-solution/protocol
 
 go 1.23
 
