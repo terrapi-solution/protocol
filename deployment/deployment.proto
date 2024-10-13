@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package api;
 
-option go_package = "github.com/terrapi-solution/terrapi-protocol/rpc";
+option go_package = "github.com/terrapi-solution/protocol/deployment";
 
 service DeploymentService {
   rpc GetDeployment(RetrieveDeploymentRequest) returns (Deployment)  {}

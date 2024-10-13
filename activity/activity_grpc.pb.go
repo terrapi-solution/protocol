@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.2
-// source: rpc/activity.proto
+// source: activity/activity.proto
 
-package rpc
+package activity
 
 import (
 	context "context"
@@ -155,5 +155,5 @@ var ActivityService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/activity.proto",
+	Metadata: "activity/activity.proto",
 }

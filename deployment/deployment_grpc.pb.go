@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.2
-// source: rpc/deployment.proto
+// source: deployment/deployment.proto
 
-package rpc
+package deployment
 
 import (
 	context "context"
@@ -117,5 +117,5 @@ var DeploymentService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/deployment.proto",
+	Metadata: "deployment/deployment.proto",
 }
