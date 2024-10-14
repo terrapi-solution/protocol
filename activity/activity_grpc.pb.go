@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ActivityService_InsertActivity_FullMethodName = "/protocol.ActivityService/InsertActivity"
-	ActivityService_ListActivity_FullMethodName   = "/protocol.ActivityService/ListActivity"
+	ActivityService_InsertActivity_FullMethodName = "/terrapi.v1.ActivityService/InsertActivity"
+	ActivityService_ListActivity_FullMethodName   = "/terrapi.v1.ActivityService/ListActivity"
 )
 
 // ActivityServiceClient is the client API for ActivityService service.
@@ -142,7 +142,7 @@ func _ActivityService_ListActivity_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ActivityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "protocol.ActivityService",
+	ServiceName: "terrapi.v1.ActivityService",
 	HandlerType: (*ActivityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

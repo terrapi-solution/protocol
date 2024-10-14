@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DeploymentService_GetDeployment_FullMethodName = "/protocol.DeploymentService/GetDeployment"
+	DeploymentService_GetDeployment_FullMethodName = "/terrapi.v1.DeploymentService/GetDeployment"
 )
 
 // DeploymentServiceClient is the client API for DeploymentService service.
@@ -108,7 +108,7 @@ func _DeploymentService_GetDeployment_Handler(srv interface{}, ctx context.Conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DeploymentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "protocol.DeploymentService",
+	ServiceName: "terrapi.v1.DeploymentService",
 	HandlerType: (*DeploymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

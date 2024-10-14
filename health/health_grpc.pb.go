@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	HealthService_CheckHealth_FullMethodName = "/protocol.HealthService/CheckHealth"
+	HealthService_CheckHealth_FullMethodName = "/terrapi.v1.HealthService/CheckHealth"
 )
 
 // HealthServiceClient is the client API for HealthService service.
@@ -110,7 +110,7 @@ func _HealthService_CheckHealth_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HealthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "protocol.HealthService",
+	ServiceName: "terrapi.v1.HealthService",
 	HandlerType: (*HealthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
