@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package api;
+package protocol;
 
 option go_package = "github.com/terrapi-solution/protocol/activity";
 
 service ActivityService {
-  rpc InsertActivity(InsertActivityRequest) returns (InsertActivityResponse) {}
-  rpc ListActivity(ListActivityRequest) returns (Activities) {}
+  rpc Insert(InsertActivityRequest) returns (InsertActivityResponse) {}
+  rpc List(ListActivityRequest) returns (Activities) {}
 }
 
 message InsertActivityResponse {
