@@ -5,7 +5,7 @@ package protocol;
 option go_package = "github.com/terrapi-solution/protocol/deployment";
 
 service DeploymentService {
-  rpc Get(RetrieveDeploymentRequest) returns (Deployment)  {}
+  rpc GetDeployment(RetrieveDeploymentRequest) returns (Deployment)  {}
 }
 
 message RetrieveDeploymentRequest {
