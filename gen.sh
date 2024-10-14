@@ -1,6 +1,7 @@
 PROTO_NAMES=(
     "activity"
     "deployment"
+    "health"
 )
 
 for name in "${PROTO_NAMES[@]}"; do
