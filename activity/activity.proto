@@ -5,19 +5,24 @@ package terrapi.v1;
 option go_package = "github.com/terrapi-solution/protocol/activity";
 
 service ActivityService {
-  rpc Insert(InsertActivityRequest) returns (InsertActivityResponse) {}
-  rpc List(ListActivityRequest) returns (Activities) {}
+  rpc Insert(InsertRequest) returns (InsertResponse) {}
+  rpc Retrieve(RetrieveRequest) returns (Activity) {}
+  rpc List(ListRequest) returns (Activities) {}
 }
 
-message InsertActivityResponse {
+message RetrieveRequest {
   int32 id = 1;
 }
 
-message ListActivityRequest {
+message InsertResponse {
+  int32 id = 1;
+}
+
+message ListRequest {
   int32 offset = 1;
 }
 
-message InsertActivityRequest {
+message InsertRequest {
   enum Pointer {
     stdout = 0;
     stderr = 1;
@@ -42,5 +47,5 @@ message Activity {
 }
 
 message Activities {
-  repeated Activity activities = 1;
+  repeated Activity results = 1;
 }

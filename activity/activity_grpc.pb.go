@@ -19,16 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ActivityService_Insert_FullMethodName = "/terrapi.v1.ActivityService/Insert"
-	ActivityService_List_FullMethodName   = "/terrapi.v1.ActivityService/List"
+	ActivityService_Insert_FullMethodName   = "/terrapi.v1.ActivityService/Insert"
+	ActivityService_Retrieve_FullMethodName = "/terrapi.v1.ActivityService/Retrieve"
+	ActivityService_List_FullMethodName     = "/terrapi.v1.ActivityService/List"
 )
 
 // ActivityServiceClient is the client API for ActivityService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActivityServiceClient interface {
-	Insert(ctx context.Context, in *InsertActivityRequest, opts ...grpc.CallOption) (*InsertActivityResponse, error)
-	List(ctx context.Context, in *ListActivityRequest, opts ...grpc.CallOption) (*Activities, error)
+	Insert(ctx context.Context, in *InsertRequest, opts ...grpc.CallOption) (*InsertResponse, error)
+	Retrieve(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*Activity, error)
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Activities, error)
 }
 
 type activityServiceClient struct {
@@ -39,9 +41,9 @@ func NewActivityServiceClient(cc grpc.ClientConnInterface) ActivityServiceClient
 	return &activityServiceClient{cc}
 }
 
-func (c *activityServiceClient) Insert(ctx context.Context, in *InsertActivityRequest, opts ...grpc.CallOption) (*InsertActivityResponse, error) {
+func (c *activityServiceClient) Insert(ctx context.Context, in *InsertRequest, opts ...grpc.CallOption) (*InsertResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InsertActivityResponse)
+	out := new(InsertResponse)
 	err := c.cc.Invoke(ctx, ActivityService_Insert_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -49,7 +51,17 @@ func (c *activityServiceClient) Insert(ctx context.Context, in *InsertActivityRe
 	return out, nil
 }
 
-func (c *activityServiceClient) List(ctx context.Context, in *ListActivityRequest, opts ...grpc.CallOption) (*Activities, error) {
+func (c *activityServiceClient) Retrieve(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*Activity, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Activity)
+	err := c.cc.Invoke(ctx, ActivityService_Retrieve_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *activityServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Activities, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Activities)
 	err := c.cc.Invoke(ctx, ActivityService_List_FullMethodName, in, out, cOpts...)
@@ -63,8 +75,9 @@ func (c *activityServiceClient) List(ctx context.Context, in *ListActivityReques
 // All implementations must embed UnimplementedActivityServiceServer
 // for forward compatibility.
 type ActivityServiceServer interface {
-	Insert(context.Context, *InsertActivityRequest) (*InsertActivityResponse, error)
-	List(context.Context, *ListActivityRequest) (*Activities, error)
+	Insert(context.Context, *InsertRequest) (*InsertResponse, error)
+	Retrieve(context.Context, *RetrieveRequest) (*Activity, error)
+	List(context.Context, *ListRequest) (*Activities, error)
 	mustEmbedUnimplementedActivityServiceServer()
 }
 
@@ -75,10 +88,13 @@ type ActivityServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedActivityServiceServer struct{}
 
-func (UnimplementedActivityServiceServer) Insert(context.Context, *InsertActivityRequest) (*InsertActivityResponse, error) {
+func (UnimplementedActivityServiceServer) Insert(context.Context, *InsertRequest) (*InsertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Insert not implemented")
 }
-func (UnimplementedActivityServiceServer) List(context.Context, *ListActivityRequest) (*Activities, error) {
+func (UnimplementedActivityServiceServer) Retrieve(context.Context, *RetrieveRequest) (*Activity, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Retrieve not implemented")
+}
+func (UnimplementedActivityServiceServer) List(context.Context, *ListRequest) (*Activities, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedActivityServiceServer) mustEmbedUnimplementedActivityServiceServer() {}
@@ -103,7 +119,7 @@ func RegisterActivityServiceServer(s grpc.ServiceRegistrar, srv ActivityServiceS
 }
 
 func _ActivityService_Insert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InsertActivityRequest)
+	in := new(InsertRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -115,13 +131,31 @@ func _ActivityService_Insert_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: ActivityService_Insert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).Insert(ctx, req.(*InsertActivityRequest))
+		return srv.(ActivityServiceServer).Insert(ctx, req.(*InsertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ActivityService_Retrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RetrieveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActivityServiceServer).Retrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ActivityService_Retrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActivityServiceServer).Retrieve(ctx, req.(*RetrieveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ActivityService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListActivityRequest)
+	in := new(ListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +167,7 @@ func _ActivityService_List_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: ActivityService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).List(ctx, req.(*ListActivityRequest))
+		return srv.(ActivityServiceServer).List(ctx, req.(*ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -148,6 +182,10 @@ var ActivityService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Insert",
 			Handler:    _ActivityService_Insert_Handler,
+		},
+		{
+			MethodName: "Retrieve",
+			Handler:    _ActivityService_Retrieve_Handler,
 		},
 		{
 			MethodName: "List",
