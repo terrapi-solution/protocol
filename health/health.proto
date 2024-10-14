@@ -6,19 +6,29 @@ option go_package = "github.com/terrapi-solution/protocol/health";
 
 service HealthService {
   // Check gets the health of the specified service.
-  rpc Check(HealthCheckRequest) returns (HealthCheckResponse)  {}
+  rpc Check(CheckRequest) returns (HealthCheck)  {}
+  // CheckAll gets the health of all services.
+  rpc CheckAll(CheckAllRequest) returns (HealthChecks) {}
 }
 
-message HealthCheckRequest {
+message CheckRequest  {
   string service = 1;
 }
 
-message HealthCheckResponse {
+message CheckAllRequest {
+  int32 offset = 1;
+}
+
+message HealthCheck {
   enum ServingStatus {
     UNKNOWN = 0;
     SERVING = 1;
     NOT_SERVING = 2;
-    SERVICE_UNKNOWN = 3;  // Used only by the Watch method.
+    SERVICE_UNKNOWN = 3;
   }
   ServingStatus status = 1;
+}
+
+message HealthChecks {
+  repeated HealthCheck healthChecks = 1;
 }
