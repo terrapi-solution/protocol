@@ -27,9 +27,10 @@ message HealthCheck {
     SERVICE_UNKNOWN = 3;
     INTERNAL_ERROR = 4;
   }
-  ServingStatus status = 1;
+  string Name = 1;
+  ServingStatus status = 2;
 }
 
 message HealthChecks {
-  repeated HealthCheck healthChecks = 1;
+  repeated HealthCheck results = 1;
 }
