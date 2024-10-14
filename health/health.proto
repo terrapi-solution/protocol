@@ -25,6 +25,7 @@ message HealthCheck {
     SERVING = 1;
     NOT_SERVING = 2;
     SERVICE_UNKNOWN = 3;
+    INTERNAL_ERROR = 4;
   }
   ServingStatus status = 1;
 }
