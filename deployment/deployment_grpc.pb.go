@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DeploymentServiceClient interface {
-	Get(ctx context.Context, in *RetrieveDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error)
+	Get(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*Deployment, error)
 }
 
 type deploymentServiceClient struct {
@@ -37,7 +37,7 @@ func NewDeploymentServiceClient(cc grpc.ClientConnInterface) DeploymentServiceCl
 	return &deploymentServiceClient{cc}
 }
 
-func (c *deploymentServiceClient) Get(ctx context.Context, in *RetrieveDeploymentRequest, opts ...grpc.CallOption) (*Deployment, error) {
+func (c *deploymentServiceClient) Get(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*Deployment, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Deployment)
 	err := c.cc.Invoke(ctx, DeploymentService_Get_FullMethodName, in, out, cOpts...)
@@ -51,7 +51,7 @@ func (c *deploymentServiceClient) Get(ctx context.Context, in *RetrieveDeploymen
 // All implementations must embed UnimplementedDeploymentServiceServer
 // for forward compatibility.
 type DeploymentServiceServer interface {
-	Get(context.Context, *RetrieveDeploymentRequest) (*Deployment, error)
+	Get(context.Context, *RetrieveRequest) (*Deployment, error)
 	mustEmbedUnimplementedDeploymentServiceServer()
 }
 
@@ -62,7 +62,7 @@ type DeploymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDeploymentServiceServer struct{}
 
-func (UnimplementedDeploymentServiceServer) Get(context.Context, *RetrieveDeploymentRequest) (*Deployment, error) {
+func (UnimplementedDeploymentServiceServer) Get(context.Context, *RetrieveRequest) (*Deployment, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedDeploymentServiceServer) mustEmbedUnimplementedDeploymentServiceServer() {}
@@ -87,7 +87,7 @@ func RegisterDeploymentServiceServer(s grpc.ServiceRegistrar, srv DeploymentServ
 }
 
 func _DeploymentService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RetrieveDeploymentRequest)
+	in := new(RetrieveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func _DeploymentService_Get_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: DeploymentService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeploymentServiceServer).Get(ctx, req.(*RetrieveDeploymentRequest))
+		return srv.(DeploymentServiceServer).Get(ctx, req.(*RetrieveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

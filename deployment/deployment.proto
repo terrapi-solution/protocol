@@ -5,14 +5,14 @@ package terrapi.v1;
 option go_package = "github.com/terrapi-solution/protocol/deployment";
 
 service DeploymentService {
-  rpc Get(RetrieveDeploymentRequest) returns (Deployment)  {}
+  rpc Get(RetrieveRequest) returns (Deployment)  {}
 }
 
-message RetrieveDeploymentRequest {
+message RetrieveRequest {
   int32 id = 1;
 }
 
-message DeploymentModule {
+message Module {
   string name = 1;
   string address = 2;
   string path = 3;
@@ -20,7 +20,7 @@ message DeploymentModule {
   string password = 5;
 }
 
-message DeploymentRequest {
+message Request {
   enum Action {
     init = 0;
     plan = 1;
@@ -29,18 +29,18 @@ message DeploymentRequest {
   }
 
   Action action = 1;
-  repeated DeploymentRequestVariable variables = 2;
+  repeated RequestVariable variables = 2;
 }
 
-message DeploymentRequestVariable {
+message RequestVariable {
   string name = 1;
   string value = 2;
   bool secret = 3;
 }
 
 message Deployment {
-  DeploymentModule module = 1;
-  DeploymentRequest request = 2;
+  Module module = 1;
+  Request request = 2;
 }
 
 
