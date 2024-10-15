@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package terrapi.v1;
+package terrapi.v1.activity;
 
 option go_package = "github.com/terrapi-solution/protocol/activity";
 
