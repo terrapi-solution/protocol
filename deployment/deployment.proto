@@ -6,10 +6,16 @@ option go_package = "github.com/terrapi-solution/protocol/deployment";
 
 service DeploymentService {
   rpc Get(RetrieveRequest) returns (Deployment)  {}
+  rpc SetStatus(StatusRequest) returns (Deployment) {}
 }
 
 message RetrieveRequest {
   int32 id = 1;
+}
+
+message StatusRequest {
+  int32 deploymentId = 1;
+  Action action = 2;
 }
 
 message Module {
@@ -20,13 +26,15 @@ message Module {
   string password = 5;
 }
 
+enum Action {
+  init = 0;
+  plan = 1;
+  apply = 2;
+  destroy = 3;
+}
+
 message Request {
-  enum Action {
-    init = 0;
-    plan = 1;
-    apply = 2;
-    destroy = 3;
-  }
+
 
   Action action = 1;
   repeated RequestVariable variables = 2;
@@ -38,9 +46,24 @@ message RequestVariable {
   bool secret = 3;
 }
 
+message Status {
+  enum State {
+    unknown = 0;
+    pending = 1;
+    running = 2;
+    failed = 3;
+    succeeded = 4;
+  }
+
+  State state = 1;
+  string message = 2;
+  int32 timestamp = 3;
+}
+
 message Deployment {
   Module module = 1;
   Request request = 2;
+  Status status = 3;
 }
 
 
