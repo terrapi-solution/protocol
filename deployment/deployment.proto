@@ -5,11 +5,11 @@ package terrapi.deployment.v1;
 option go_package = "github.com/terrapi-solution/protocol/deployment";
 
 service DeploymentService {
-  rpc Get(RetrieveRequest) returns (SetStatusResponse)  {}
-  rpc SetStatus(SetStatusRequest) returns (SetStatusResponse) {}
+  rpc Get(GetRequest) returns (GetResponse)  {}
+  rpc SetStatus(SetStatusRequest) returns (GetResponse) {}
 }
 
-message RetrieveRequest {
+message GetRequest {
   int32 id = 1;
 }
 
@@ -46,11 +46,11 @@ message RequestVariable {
 
 message Status {
   enum State {
-    unknown = 0;
-    pending = 1;
-    running = 2;
-    failed = 3;
-    succeeded = 4;
+    STATE_UNKNOWN = 0;
+    STATE_PENDING = 1;
+    STATE_RUNNING = 2;
+    STATE_FAILED = 3;
+    STATE_SUCCEEDED = 4;
   }
 
   State state = 1;
@@ -58,7 +58,7 @@ message Status {
   int32 timestamp = 3;
 }
 
-message SetStatusResponse {
+message GetResponse {
   Module module = 1;
   Request request = 2;
   Status status = 3;
