@@ -35,7 +35,7 @@ Ensure the `protoc-gen-go` and `protoc-gen-go-grpc` binaries are in your PATH:
 export PATH="$PATH:$(go env GOPATH)/bin"
 ```
 
-Generating Code
+## Generating Code
 
 To generate the Go code from the Protocol Buffers definitions, run the following script:
 
