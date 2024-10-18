@@ -37,16 +37,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DeploymentService_Get_FullMethodName       = "/terrapi.deployment.v1.DeploymentService/Get"
-	DeploymentService_SetStatus_FullMethodName = "/terrapi.deployment.v1.DeploymentService/SetStatus"
+	DeploymentService_Get_FullMethodName       = "/deployment.DeploymentService/Get"
+	DeploymentService_SetStatus_FullMethodName = "/deployment.DeploymentService/SetStatus"
 )
 
 // DeploymentServiceClient is the client API for DeploymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DeploymentServiceClient interface {
-	Get(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*SetStatusResponse, error)
-	SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*SetStatusResponse, error)
+	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
 type deploymentServiceClient struct {
@@ -57,9 +57,9 @@ func NewDeploymentServiceClient(cc grpc.ClientConnInterface) DeploymentServiceCl
 	return &deploymentServiceClient{cc}
 }
 
-func (c *deploymentServiceClient) Get(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*SetStatusResponse, error) {
+func (c *deploymentServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetStatusResponse)
+	out := new(GetResponse)
 	err := c.cc.Invoke(ctx, DeploymentService_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -67,9 +67,9 @@ func (c *deploymentServiceClient) Get(ctx context.Context, in *RetrieveRequest, 
 	return out, nil
 }
 
-func (c *deploymentServiceClient) SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*SetStatusResponse, error) {
+func (c *deploymentServiceClient) SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetStatusResponse)
+	out := new(GetResponse)
 	err := c.cc.Invoke(ctx, DeploymentService_SetStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -81,8 +81,8 @@ func (c *deploymentServiceClient) SetStatus(ctx context.Context, in *SetStatusRe
 // All implementations must embed UnimplementedDeploymentServiceServer
 // for forward compatibility.
 type DeploymentServiceServer interface {
-	Get(context.Context, *RetrieveRequest) (*SetStatusResponse, error)
-	SetStatus(context.Context, *SetStatusRequest) (*SetStatusResponse, error)
+	Get(context.Context, *GetRequest) (*GetResponse, error)
+	SetStatus(context.Context, *SetStatusRequest) (*GetResponse, error)
 	mustEmbedUnimplementedDeploymentServiceServer()
 }
 
@@ -93,10 +93,10 @@ type DeploymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDeploymentServiceServer struct{}
 
-func (UnimplementedDeploymentServiceServer) Get(context.Context, *RetrieveRequest) (*SetStatusResponse, error) {
+func (UnimplementedDeploymentServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedDeploymentServiceServer) SetStatus(context.Context, *SetStatusRequest) (*SetStatusResponse, error) {
+func (UnimplementedDeploymentServiceServer) SetStatus(context.Context, *SetStatusRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetStatus not implemented")
 }
 func (UnimplementedDeploymentServiceServer) mustEmbedUnimplementedDeploymentServiceServer() {}
@@ -121,7 +121,7 @@ func RegisterDeploymentServiceServer(s grpc.ServiceRegistrar, srv DeploymentServ
 }
 
 func _DeploymentService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RetrieveRequest)
+	in := new(GetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func _DeploymentService_Get_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: DeploymentService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeploymentServiceServer).Get(ctx, req.(*RetrieveRequest))
+		return srv.(DeploymentServiceServer).Get(ctx, req.(*GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -160,7 +160,7 @@ func _DeploymentService_SetStatus_Handler(srv interface{}, ctx context.Context, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DeploymentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "terrapi.deployment.v1.DeploymentService",
+	ServiceName: "deployment.DeploymentService",
 	HandlerType: (*DeploymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
