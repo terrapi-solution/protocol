@@ -37,8 +37,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	HealthService_Check_FullMethodName    = "/health.HealthService/Check"
-	HealthService_CheckAll_FullMethodName = "/health.HealthService/CheckAll"
+	HealthService_Check_FullMethodName    = "/health.v1.HealthService/Check"
+	HealthService_CheckAll_FullMethodName = "/health.v1.HealthService/CheckAll"
 )
 
 // HealthServiceClient is the client API for HealthService service.
@@ -164,7 +164,7 @@ func _HealthService_CheckAll_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HealthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "health.HealthService",
+	ServiceName: "health.v1.HealthService",
 	HandlerType: (*HealthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

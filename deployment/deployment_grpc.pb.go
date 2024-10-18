@@ -37,8 +37,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DeploymentService_Get_FullMethodName       = "/deployment.DeploymentService/Get"
-	DeploymentService_SetStatus_FullMethodName = "/deployment.DeploymentService/SetStatus"
+	DeploymentService_Get_FullMethodName       = "/deployment.v1.DeploymentService/Get"
+	DeploymentService_SetStatus_FullMethodName = "/deployment.v1.DeploymentService/SetStatus"
 )
 
 // DeploymentServiceClient is the client API for DeploymentService service.
@@ -46,7 +46,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DeploymentServiceClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
-	SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*SetStatusResponse, error)
 }
 
 type deploymentServiceClient struct {
@@ -67,9 +67,9 @@ func (c *deploymentServiceClient) Get(ctx context.Context, in *GetRequest, opts 
 	return out, nil
 }
 
-func (c *deploymentServiceClient) SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *deploymentServiceClient) SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*SetStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResponse)
+	out := new(SetStatusResponse)
 	err := c.cc.Invoke(ctx, DeploymentService_SetStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -82,7 +82,7 @@ func (c *deploymentServiceClient) SetStatus(ctx context.Context, in *SetStatusRe
 // for forward compatibility.
 type DeploymentServiceServer interface {
 	Get(context.Context, *GetRequest) (*GetResponse, error)
-	SetStatus(context.Context, *SetStatusRequest) (*GetResponse, error)
+	SetStatus(context.Context, *SetStatusRequest) (*SetStatusResponse, error)
 	mustEmbedUnimplementedDeploymentServiceServer()
 }
 
@@ -96,7 +96,7 @@ type UnimplementedDeploymentServiceServer struct{}
 func (UnimplementedDeploymentServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedDeploymentServiceServer) SetStatus(context.Context, *SetStatusRequest) (*GetResponse, error) {
+func (UnimplementedDeploymentServiceServer) SetStatus(context.Context, *SetStatusRequest) (*SetStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetStatus not implemented")
 }
 func (UnimplementedDeploymentServiceServer) mustEmbedUnimplementedDeploymentServiceServer() {}
@@ -160,7 +160,7 @@ func _DeploymentService_SetStatus_Handler(srv interface{}, ctx context.Context, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DeploymentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "deployment.DeploymentService",
+	ServiceName: "deployment.v1.DeploymentService",
 	HandlerType: (*DeploymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package health;
+package health.v1;
 
 option go_package = "github.com/terrapi-solution/protocol/health";
 
@@ -28,7 +28,7 @@ message CheckResponse {
     SERVING_STATUS_SERVICE_UNKNOWN = 4;
     SERVING_STATUS_INTERNAL_ERROR = 5;
   }
-  string Name = 1;
+  string name = 1;
   ServingStatus status = 2;
 }
 

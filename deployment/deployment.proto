@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package deployment;
+package deployment.v1;
 
 option go_package = "github.com/terrapi-solution/protocol/deployment";
 
 service DeploymentService {
   rpc Get(GetRequest) returns (GetResponse)  {}
-  rpc SetStatus(SetStatusRequest) returns (GetResponse) {}
+  rpc SetStatus(SetStatusRequest) returns (SetStatusResponse) {}
 }
 
 message GetRequest {
@@ -58,6 +58,11 @@ message Status {
   State state = 1;
   string message = 2;
   int32 timestamp = 3;
+}
+
+message SetStatusResponse {
+  int32 deployment_id = 1;
+  Status status = 2;
 }
 
 message GetResponse {

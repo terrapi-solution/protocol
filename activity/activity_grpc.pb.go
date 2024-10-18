@@ -37,9 +37,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ActivityService_Insert_FullMethodName   = "/activity.ActivityService/Insert"
-	ActivityService_Retrieve_FullMethodName = "/activity.ActivityService/Retrieve"
-	ActivityService_List_FullMethodName     = "/activity.ActivityService/List"
+	ActivityService_Insert_FullMethodName   = "/activity.v1.ActivityService/Insert"
+	ActivityService_Retrieve_FullMethodName = "/activity.v1.ActivityService/Retrieve"
+	ActivityService_List_FullMethodName     = "/activity.v1.ActivityService/List"
 )
 
 // ActivityServiceClient is the client API for ActivityService service.
@@ -194,7 +194,7 @@ func _ActivityService_List_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ActivityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "activity.ActivityService",
+	ServiceName: "activity.v1.ActivityService",
 	HandlerType: (*ActivityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
