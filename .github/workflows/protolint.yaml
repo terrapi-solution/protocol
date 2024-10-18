@@ -1,5 +1,5 @@
 ---
-name: Lint and Check Breaking Changes
+name: Lint
 
 on:
   push:

@@ -1,7 +1,10 @@
 # TerrAPI Protocol
 
-## Overview
+[![Current Tag](https://img.shields.io/github/v/tag/terrapi-solution/protocol?sort=semver)](https://github.com/terrapi-solution/protocol)
+[![Lint Status](https://github.com/terrapi-solution/protocol/actions/workflows/protolint.yaml/badge.svg)](https://github.com/terrapi-solution/protocol/actions/workflows/protolint.yaml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/terrapi-solution/protocol.svg)](https://pkg.go.dev/github.com/terrapi-solution/protocol)
 
+## Overview
 This project shares a protobuf models with all TerrAPI projects.
 
 ## Prerequisites
