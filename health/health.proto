@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package terrapi.v1.health;
+package terrapi.health.v1;
 
 option go_package = "github.com/terrapi-solution/protocol/health";
 
 service HealthService {
   // Check gets the health of the specified service.
-  rpc Check(CheckRequest) returns (HealthCheck)  {}
+  rpc Check(CheckRequest) returns (CheckResponse)  {}
   // CheckAll gets the health of all services.
-  rpc CheckAll(CheckAllRequest) returns (HealthChecks) {}
+  rpc CheckAll(CheckAllRequest) returns (CheckAllResponse) {}
 }
 
 message CheckRequest  {
@@ -19,18 +19,18 @@ message CheckAllRequest {
   int32 offset = 1;
 }
 
-message HealthCheck {
+message CheckResponse {
   enum ServingStatus {
-    UNKNOWN = 0;
-    SERVING = 1;
-    NOT_SERVING = 2;
-    SERVICE_UNKNOWN = 3;
-    INTERNAL_ERROR = 4;
+    SERVING_STATUS_UNKNOWN = 0;
+    SERVING_STATUS_SERVING = 1;
+    SERVING_STATUS_NOT_SERVING = 2;
+    SERVING_STATUS_SERVICE_UNKNOWN = 3;
+    SERVING_STATUS_INTERNAL_ERROR = 4;
   }
   string Name = 1;
   ServingStatus status = 2;
 }
 
-message HealthChecks {
-  repeated HealthCheck results = 1;
+message CheckAllResponse {
+  repeated CheckResponse results = 1;
 }

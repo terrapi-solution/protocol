@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package terrapi.v1.activity;
+package terrapi.activity.v1;
 
 option go_package = "github.com/terrapi-solution/protocol/activity";
 
 service ActivityService {
   rpc Insert(InsertRequest) returns (InsertResponse) {}
-  rpc Retrieve(RetrieveRequest) returns (Activity) {}
-  rpc List(ListRequest) returns (Activities) {}
+  rpc Retrieve(RetrieveRequest) returns (RetrieveResponse) {}
+  rpc List(ListRequest) returns (ListResponse) {}
 }
 
 message RetrieveRequest {
@@ -22,23 +22,18 @@ message ListRequest {
   int32 offset = 1;
 }
 
-message InsertRequest {
-  enum Pointer {
-    stdout = 0;
-    stderr = 1;
-  }
+enum Pointer {
+  POINTER_STDOUT = 0;
+  POINTER_STDERR = 1;
+}
 
+message InsertRequest {
   int32 deployment = 2;
   Pointer pointer = 3;
   string message = 4;
 }
 
-message Activity {
-  enum Pointer {
-    stdout = 0;
-    stderr = 1;
-  }
-
+message RetrieveResponse {
   int32 id = 1;
   int32 deployment = 2;
   Pointer pointer = 3;
@@ -46,6 +41,6 @@ message Activity {
   int32 timestamp = 5;
 }
 
-message Activities {
-  repeated Activity results = 1;
+message ListResponse {
+  repeated RetrieveResponse results = 1;
 }

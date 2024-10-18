@@ -1,3 +1,6 @@
+@echo off
+setlocal
+
 REM
 REM Licensed to the TerrAPI under one or more contributor
 REM license agreements. See the NOTICE file
@@ -15,9 +18,6 @@ REM WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM See the License for the specific language governing permissions and
 REM limitations under the License.
 REM
-
-@echo off
-setlocal
 
 rem Define array elements
 set "PROTO_NAMES=activity deployment health"
