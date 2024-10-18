@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Buf Init
-        uses: bufbuild/buf-setup-action@v1.9.0
+        uses: bufbuild/buf-setup-action@v1.45.0
         with:
           version: latest
       - name: Buf Lint
