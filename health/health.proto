@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package terrapi.health.v1;
+package terrapi.health;
 
 option go_package = "github.com/terrapi-solution/protocol/health";
 
