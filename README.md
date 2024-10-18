@@ -2,7 +2,7 @@
 
 ## Overview
 
-Terrapi Protocol is a gRPC-based protocol in the TerrAPI system.
+This project shares a protobuf models with all TerrAPI projects.
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ gen.cmd
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an e-mail to <contact@thomas-illiet.fr>.
+If you discover a security vulnerability within this package, please send an e-mail to <contact@thomas-illiet.fr>
 
 ## Contributing
 
