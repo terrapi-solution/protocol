@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package terrapi.activity;
+package activity;
 
 option go_package = "github.com/terrapi-solution/protocol/activity";
 
@@ -23,8 +23,9 @@ message ListRequest {
 }
 
 enum Pointer {
-  POINTER_STDOUT = 0;
-  POINTER_STDERR = 1;
+  POINTER_UNSPECIFIED = 0;
+  POINTER_STDOUT = 1;
+  POINTER_STDERR = 2;
 }
 
 message InsertRequest {
